@@ -1,22 +1,30 @@
 'use strict';
 module.exports = function() {
-  let storedKey = null;
-  let storedVal; 
+//   let storedKey;
+//   let storedVal;
+  const secret = {};
+
+  function setValue(key, value) {
+    if (!(key)) {
+        return null;
+    }  else {
+        secret.storedKey = key;
+        secret.storedVal = value;
+    }
+  }
+
+  function getValue(key) {
+    if ((!key)) {
+        return null;
+    } else if (key !== secret.storedKey) {
+        return null;
+    } else {
+        return secret.storedVal;
+    }
+  }
+
   return {
-      setValue: function(key, value) {
-        if (!(key)) {
-            return null;
-        }  else {
-            storedKey = key;
-            storedVal = value;
-        }
-      },
-      getValue: function(key) {
-          if ((!storedKey)) {
-              return null;
-          } else {
-              return storedVal;
-          }
-      }
+      setValue: setValue,
+      getValue: getValue
   }
 };
